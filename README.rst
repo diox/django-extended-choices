@@ -134,7 +134,7 @@ You can even iterate on a ``Choices`` objects to get choices as seen by Django:
     >>> for choice in STATES:
     ...     print(choice)
     (1, 'Online')
-    (2, 'Draf')
+    (2, 'Draft')
     (3, 'Offline')
 
 To get all choice entries as given to the ``Choices`` object, you can use the ``entries``
