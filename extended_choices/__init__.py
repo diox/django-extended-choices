@@ -1,7 +1,6 @@
 """Little helper application to improve django choices (for fields)"""
-
+from __future__ import unicode_literals
 import pkg_resources
-from future.builtins import str
 from os import path
 from setuptools.config import read_configuration
 
@@ -22,5 +21,9 @@ def _extract_version(package_name):
     return version
 
 
-EXACT_VERSION = _extract_version('django_extended_choices')
-VERSION = tuple(int(part) for part in EXACT_VERSION.split('.') if str(part).isnumeric())
+# '%s' % ... is a hack to ensure EXACT_VERSION is a unicode string in python 2,
+# because pkg_resources.get_distribution(...).version returns a bytes str and
+# that would fail when calling isnumeric() below. It can be safely removed when
+# Python 2 support is removed.
+EXACT_VERSION = '%s' % _extract_version('django_extended_choices')
+VERSION = tuple(int(part) for part in EXACT_VERSION.split('.') if part.isnumeric())
